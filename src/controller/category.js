@@ -22,23 +22,7 @@ function createCategories(categories,parentId = null){
     return categoryList;
 }
 
-function getCategories(categories,parentId = null){
-    const categoryImages = [];
-    let category;
-    if(parentId == null){
-        category = categories.filter(cat=>cat.parentId == undefined);
-    }else{
-        category = categories.filter(cat =>cat.parentId == parentId)
-    }
 
-    for(let cate of category){
-        categoryImages.push({
-            _id:cate._id,
-            categoryImage:cate.categoryImage,
-        })
-    }
-    return categoryImages;
-}
 
 exports.addCategory = (req,res)=>{
 
@@ -80,18 +64,7 @@ exports.getCategories = (req, res) => {
     })
 }
 
-exports.getCategoryImage = (req, res) => {
-    Category.find({})
-    .exec((error,categories)=>{
-        if(error){
-            return res.status(422).json({error})
-        }
-        if(categories){
-            const categoryImages = getCategories(categories)
-            return res.status(200).json({categoryImages})
-        } 
-    })
-}
+
 
 
 
